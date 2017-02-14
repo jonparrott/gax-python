@@ -12,8 +12,9 @@ matrix:
     env: TOXENV=py34
   - python: 3.5
     env: TOXENV=py35
-  - python: pypy
-    env: TOXENV=pypy
+  # Disabled until gRPC supports PyPy.
+  # - python: pypy
+  #   env: TOXENV=pypy
   - python: 3.5
     env: TOXENV=cover
 cache:
@@ -23,4 +24,4 @@ install:
 - pip install --upgrade tox
 script: tox
 after_success:
-- codecov
+- test $TOXENV = "cover" && codecov
